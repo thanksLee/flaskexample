@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include "include/inc_header.html" %}
+
+<body>
+
+{% block body %}
+    <h1> Hello !!!! </h1>
+
+    <div class="container" align="center" style="height:80%">
+        <a href="/dashboard/">
+            <video autoplay="autoplay" muted="muted" poster="/static/videos/python-programming-tutorials-main.png" style="width:100%; max-height:80%">
+                <source src="/static/videos/python-programming-tutorials-main.mp4" type="video/mp4">
+                <source src="/static/videos/python-programming-tutorials-main.webm" type="video/mp4">
+            </video>
+        </a>
+    </div>
+{% endblock %}
+
+{% include "include/inc_body.html" %}
+</body>
+</html>
