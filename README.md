@@ -13,11 +13,22 @@ Python Flask Example
 - pip install --upgrade setuptools
 - pip install virtualenv
 - pip install sqlalchemy
+- pip install flask-mysql
 - pip install MySQL-python
-- MySQL-python 설치하면 오류가 발생 (error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": https://visualstudio.microsoft.com/downloads/)
-  그러면 이곳에서 다운로드오류 발생시 : https://visualstudio.microsoft.com/ko/vs/older-downloads/?rr=http%3A%2F%2Fneedjarvis.tistory.com%2F224
-  만약 안될시 : https://pg.kdtk.net/1770 이곳에서 받는다.
-- etc 폴더에 visualcppbuildtools_full.exe.bk -> visualcppbuildtools_full.exe 변경하여 실행
+  MySQL-python을 설치하기 위하여 해야 하는 사항
+   > MySQL-python 설치하면 오류가 발생 (error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": https://visualstudio.microsoft.com/downloads/)
+     다운로드오류 발생시 : https://visualstudio.microsoft.com/ko/vs/older-downloads/?rr=http%3A%2F%2Fneedjarvis.tistory.com%2F224
+     만약 다운로드가 안될시 안될시 : https://pg.kdtk.net/1770 이글에 첨부된 파일을 받는다.
+     아니면, etc 폴더에 visualcppbuildtools_full.exe.bk -> visualcppbuildtools_full.exe 변경하여 실행
+
+- pip install MySQL-python 오류 발생시 해결 방법
+   > https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient
+     위 사이트에 가서 알맞는 mysqlclient를 다운로드
+   > pip install 다운로드 받은 경로\mysqlclient-1.3.13-cp37-cp37m-win32.whl 설치
+     ex) pip install C:\prj_flaskapp\etc\mysqlclient-1.3.13-cp37-cp37m-win32.whl
+     만약 가상환경에서 사용한다면 가상환경에서도 다시 pip install을 해줘야 한다.
+   > test 폴더의 mysql_dbconn_test.py 실행
+     ex) python mysql_dbconn_test.py   
 ```
 > 2.파이썬 가상환경
 ```

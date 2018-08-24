@@ -1,5 +1,6 @@
 from flask import Flask, render_template, flash, request, url_for, redirect
 from source.content_management import content
+from source.dbconnect import connection
 
 TOPIC_DIC = content()
 
@@ -25,7 +26,7 @@ def slashboard():
     except Exception as e:
         return render_template("error/500.html", error=e)
 
-# mehods를 제거하면 405 에러가 발생
+# methods를 제거하면 405 에러가 발생
 @app.route("/login/", methods=["GET", "POST"])
 def login_page():
     lv_error = ""
@@ -36,8 +37,8 @@ def login_page():
             lv_username = request.form["username"]
             lv_password = request.form["password"]
 
-            flash(lv_username)
-            flash(lv_password)
+            #flash(lv_username)
+            #flash(lv_password)
 
             if lv_username == "admin" and lv_password == "password":
                 return redirect(url_for("dashboard"))
@@ -48,6 +49,14 @@ def login_page():
         lv_error = e
         flash(lv_error)
         return render_template("login.html", error=lv_error)
+
+@app.route("/register/", methods=["GET", "POST"])
+def register_page():
+    try:
+        c, conn = connection()
+        return("Ok~~~~")
+    except Exception as e:
+        return(str(e))
 
 # S : 에러 처리
 @app.errorhandler(404)
