@@ -4,7 +4,7 @@ Python Flask Example
 - Practical Flask Web Development Tutorials 이 동영상을 참조하여 만듬.
 - 유튜브 참조 : https://www.youtube.com/playlist?list=PLQVvvaa0QuDc_owjTbIY4rbgXOFkUYOUB
 
-#### 설치
+#### 윈도우에 Python 설치
 ***
 > 1.windows에서 python 개발
 
