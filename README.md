@@ -39,5 +39,5 @@ Python Flask Example
 ### flask Error 대처
 > 1. builtins.RuntimeError
   - RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.
-  -- python 파일 
+  - python 파일 
      app.config["SECRET_KEY"] = "hard to guess string" 
