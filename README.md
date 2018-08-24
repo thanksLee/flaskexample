@@ -12,8 +12,6 @@ Python Flask Example
 - python 설치 : 3.7
 - pip install --upgrade setuptools
 - pip install virtualenv
-- pip install sqlalchemy
-- pip install flask-mysql
 - pip install MySQL-python
   MySQL-python을 설치하기 위하여 해야 하는 사항
    > MySQL-python 설치하면 오류가 발생 (error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": https://visualstudio.microsoft.com/downloads/)
@@ -22,6 +20,7 @@ Python Flask Example
      아니면, etc 폴더에 visualcppbuildtools_full.exe.bk -> visualcppbuildtools_full.exe 변경하여 실행
 
 - pip install MySQL-python 오류 발생시 해결 방법
+   > 사이트 참조 : http://victorydntmd.tistory.com/275
    > https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient
      위 사이트에 가서 알맞는 mysqlclient를 다운로드
    > pip install 다운로드 받은 경로\mysqlclient-1.3.13-cp37-cp37m-win32.whl 설치
@@ -43,7 +42,11 @@ Python Flask Example
 > 4.가상환경에서 필요한 라이브러리 설치
 ```
 - cd Scripts
-- pip install flask
+ - pip install flask
+ - pip install flask-mysql
+ - pip install flask-wtf
+ - pip install passlib
+ - pip install sqlalchemy
 ```
 
 ### flask template 사용

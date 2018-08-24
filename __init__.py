@@ -1,6 +1,12 @@
-from flask import Flask, render_template, flash, request, url_for, redirect
+from flask import Flask, render_template, flash, request, url_for, redirect, session
+from wtforms import Form
+from passlib.hash import sha256_crypt
+from MySQLdb import escape_string as thwart
+
 from source.content_management import content
 from source.dbconnect import connection
+
+import gc
 
 TOPIC_DIC = content()
 
@@ -50,13 +56,50 @@ def login_page():
         flash(lv_error)
         return render_template("login.html", error=lv_error)
 
+class RegistrationForm(Form):
+    username = TextField("Username", [validators.Length(min=4, max=20)])
+    email    = TextField("Email", [validators.Length(min=4, max=50)])
+    password = PasswordField("Password", [validators.Required(),
+                                          validators.EqualTo('confirm', message="Passwords must match.")
+                                          ])
+    confirm    = PasswordField("Repeat Password")
+    accept_tos = BooleanField("I accept the <a href='/tos/'>Terms of Service</a> and the <a href='/privacy/'>Privacy Notice </a>(Last updated Jan 15, 2018)", [validators.required()])
+
+
 @app.route("/register/", methods=["GET", "POST"])
 def register_page():
     try:
-        c, conn = connection()
-        return("Ok~~~~")
+        form = RegistrationForm(request.form)
+        if request.method == "POST" and form.validate():
+            username = form.username.data
+            email    = form.email.data
+            password = sha256_crypt.encrypt((str(form.password.data)))
+
+            c, conn = connection()
+
+            x = c.execute("select * from users where username = (%s)", (thwart(username)))
+
+            if int(len(x)) > 0:
+                flash("That username is already taken, please choose another")
+                return render_template("register.html", form=form)
+            else:
+                c.execute("insert into users(username, password, email, tracking) values(%s, %s, %s, %)",
+                          (thwart(username), thwart(password), thwart(email), thwart("/introduction-to-pyton-programming/")))
+                conn.commit()
+                flash("Thanks for registering!")
+                c.close()
+                conn.close()
+                gc.collect()
+
+                session["logged_in"]  = True
+                session["username"] = username
+
+                return redirect(url_for('dashboard.html'))
+        return render_template("register.html", form=form)
+
     except Exception as e:
         return(str(e))
+
 
 # S : 에러 처리
 @app.errorhandler(404)
