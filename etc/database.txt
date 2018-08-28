@@ -21,7 +21,7 @@ FLUSH PRIVILEGES;
 --=================================================================================================
 -- devpythontest 계정으로 생성
 --=================================================================================================
-create table user (
+create table users (
    uid int(11) auto_increment,
    username varchar(20),
    password varchar(100),

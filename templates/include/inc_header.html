@@ -21,50 +21,14 @@
         <ul class="nav navbar-nav navbar-right">
             <div style="margin-right:10px; margin-left:15px; margin-top:5px; margin-bottom:5px;" class="container-fluid">
                 <h5>
-                    <a href="/support-donate/"> <span class="glyphicon glyphicon-heart"></span> Support&nbsp;&nbsp;&nbsp;</a>
-
-                    <a role="presentaion" data-toggle="modal" data-target="#loginModal" href="#"><span class="glyphicon glyphicon-log-in"></span> Login&nbsp;&nbsp;&nbsp;</a>
-                    <a role="presentaion" data-toggle="modal" data-target="#register" href="#"><span class="glyphicon glyphicon-pencil"></span> Sign up&nbsp;&nbsp;&nbsp;</a>
-
-                    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="registerModalLabel">Register</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="container">
-                                        <form action="/register" method="post">
-                                            <dl>
-                                                <dt>
-                                                    <label for="username">username</label>
-                                                    <dd><input id="username" name="username" type="text" value=""></dd>
-                                                </dt>
-                                                <dt>
-                                                    <label for="email">email</label>
-                                                    <dd><input id="email" name="email" type="text" value=""></dd>
-                                                </dt>
-                                                <dt>
-                                                    <label for="password">New Password</label>
-                                                    <dd><input id="password" name="password" type="password" value=""></dd>
-                                                </dt>
-                                                <dt>
-                                                    <label for="confirm">Repeat Password</label>
-                                                    <dd><input id="confirm" name="confirm" type="password" value=""></dd>
-                                                </dt>
-                                                <dt>
-                                                    <label for="accept_tos">I accept the <a href="/about/tos" target="blank">Terms of Service</a> and <a href="/about/privacy-policy" target="blank">Privacy Notice</a>(updated Jan 22, 2018)</label>
-                                                    <dd><input id="accept_tos" name="accept_tos" type="checkbox" value="y"></dd>
-                                                </dt>
-                                            </dl>
-                                            <p><input type="submit" value="Register"></p>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% if session.logged_in %}
+                        <a href="/support-donate/"> <span class="glyphicon glyphicon-heart"></span> Support&nbsp;&nbsp;&nbsp;</a>
+                        <a href="/logout/"><span class="glyphicon glyphicon-log-in"></span> Logout&nbsp; &nbsp;&nbsp; </a>
+                    {% else %}
+                        <a href="/support-donate/"> <span class="glyphicon glyphicon-heart"></span> Support&nbsp;&nbsp;&nbsp;</a>
+                        <a href="/login/"><span class="glyphicon glyphicon-log-in"></span> <a href="">Login&nbsp; &nbsp;&nbsp; </a>
+                        <a href="/register/"><span class="glyphicon glyphicon-pencil"></span> <a href="">Sign up</a>
+                    {% endif %}
                 </h5>
             </div>
         </ul>

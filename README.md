@@ -3,6 +3,7 @@ Python Flask Example
 ```
 - Practical Flask Web Development Tutorials 이 동영상을 참조하여 만듬.
 - 유튜브 참조 : https://www.youtube.com/playlist?list=PLQVvvaa0QuDc_owjTbIY4rbgXOFkUYOUB
+- 유튜브 내용 참조 : https://www.pythonprogramming.net/practical-flask-introduction/
 ```
 
 #### 윈도우에 Python 설치

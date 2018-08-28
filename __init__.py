@@ -1,14 +1,18 @@
 from flask import Flask, render_template, flash, request, url_for, redirect, session
-from wtforms import Form
+
+from wtforms import Form, BooleanField, TextField, PasswordField, validators
+
 from passlib.hash import sha256_crypt
 from MySQLdb import escape_string as thwart
 
-from source.content_management import content
-from source.dbconnect import connection
+from functools import wraps
+
+from source.content_management import Content
+from source.dbconnect import Connection
 
 import gc
 
-TOPIC_DIC = content()
+TOPIC_DIC = Content()
 
 app = Flask(__name__)
 
@@ -32,28 +36,61 @@ def slashboard():
     except Exception as e:
         return render_template("error/500.html", error=e)
 
-# methods를 제거하면 405 에러가 발생
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if "logged_in" in session:
+            return f(*args, **kwargs)
+        else:
+            flash("You need to login first")
+            return redirect(url_for("login_page"))
+    return wrap
+
+@app.route("/logout/")
+@login_required
+def logout():
+    session.clear()
+    flash("You have been logged out!")
+    gc.collect()
+    return redirect(url_for("index"))
+
+
+# methods를 제거하면 405 에러가 발생 그래서 꼭 methods를 추가 해야 함
 @app.route("/login/", methods=["GET", "POST"])
 def login_page():
     lv_error = ""
-    lv_username = ""
-    lv_password = ""
     try:
+        c, conn = Connection();
         if request.method == "POST":
             lv_username = request.form["username"]
             lv_password = request.form["password"]
 
+            data = c.execute("select * from users where username = (%s)", (thwart(lv_username),))
+            data = c.fetchone()[2]
+
+            if sha256_crypt.verify(lv_password, data):
+                session["logged_in"] = True
+                session["username"] = lv_username
+
+                flash("You are now logged in!!")
+
+                return redirect(url_for("dashboard"))
+            else:
+                lv_error = "Invalid credentials, try again."
+
+        gc.collect()
+        return render_template("login.html", error=lv_error)
             #flash(lv_username)
             #flash(lv_password)
 
-            if lv_username == "admin" and lv_password == "password":
-                return redirect(url_for("dashboard"))
-            else:
-                lv_error = "Invalid credentials. Try Again."
-        return render_template("login.html", error=lv_error)
+            # if lv_username == "admin" and lv_password == "password":
+            #     return redirect(url_for("dashboard"))
+            # else:
+            #     lv_error = "Invalid credentials. Try Again."
     except Exception as e:
-        lv_error = e
-        flash(lv_error)
+        #lv_error = e
+        #flash(lv_error)
+        lv_error = "Invalid credentials, try again."
         return render_template("login.html", error=lv_error)
 
 class RegistrationForm(Form):
@@ -74,28 +111,29 @@ def register_page():
             username = form.username.data
             email    = form.email.data
             password = sha256_crypt.encrypt((str(form.password.data)))
+            #password = form.password.data
 
-            c, conn = connection()
+            c, conn = Connection()
 
-            x = c.execute("select * from users where username = (%s)", (thwart(username)))
+            x = c.execute("select * from users where username = (%s)", (thwart(username),))
 
-            if int(len(x)) > 0:
+            if int(x) > 0:
                 flash("That username is already taken, please choose another")
-                return render_template("register.html", form=form)
+                return render_template("user/register.html", form=form)
             else:
-                c.execute("insert into users(username, password, email, tracking) values(%s, %s, %s, %)",
+                c.execute("insert into users(username, password, email, tracking) values(%s, %s, %s, %s)",
                           (thwart(username), thwart(password), thwart(email), thwart("/introduction-to-pyton-programming/")))
                 conn.commit()
                 flash("Thanks for registering!")
-                c.close()
-                conn.close()
-                gc.collect()
 
                 session["logged_in"]  = True
                 session["username"] = username
 
-                return redirect(url_for('dashboard.html'))
-        return render_template("register.html", form=form)
+                return redirect(url_for('dashboard'))
+            c.close()
+            conn.close()
+            gc.collect()
+        return render_template("user/register.html", form=form)
 
     except Exception as e:
         return(str(e))
