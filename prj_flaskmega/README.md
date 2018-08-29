@@ -54,6 +54,7 @@ Python Flask Example
  - pip install guess_language
  - pip install flipflop
  - pip install coverage
+ - pip install pymysql
 
 ```
 

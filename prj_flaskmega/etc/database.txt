@@ -1,0 +1,30 @@
+--=================================================================================================
+-- Mariadb 10.2.14
+--=================================================================================================
+-- root 계정으로 생성
+--=================================================================================================
+
+drop database dev_pythontest_db;
+
+create database dev_pythontest_db default character set utf8mb4 collate utf8mb4_unicode_ci;
+
+drop user devpythontest;
+
+create user devpythontest identified by 'Devpythontest0!';
+
+grant all on dev_pythontest_db.* to devpythontest@'%' identified by 'Devpythontest0!' with grant option;
+
+GRANT ALL ON dev_pythontest_db.* TO devpythontest@'localhost' IDENTIFIED BY 'Devpythontest0!' with grant option;
+
+FLUSH PRIVILEGES;
+
+--=================================================================================================
+-- devpythontest 계정으로 생성
+--=================================================================================================
+create table m_users (
+   uid int(11) auto_increment,
+   nickname varchar(64),
+   email varchar(120),
+   primary key(uid)
+)
+engine=innodb
