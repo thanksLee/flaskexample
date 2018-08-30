@@ -43,11 +43,19 @@ Python Flask Example
 ```
 - cd Scripts
  - pip install flask
- - pip install python-dotenv
- - pip install flask-wtf
- - pip install flask-sqlalchemy
- - pip install flask-migrate
  - pip install flask-login
+ - pip install flask-openid
+ - pip install flask-mail
+ - pip install flask-sqlalchemy
+ - pip install sqlalchemy-migrate
+ - pip install flask-whooshalchemy
+ - pip install flask-wtf
+ - pip install flask-babel
+ - pip install guess_language
+ - pip install flipflop
+ - pip install coverage
+ - pip install pymysql
+
 ```
 
 ### flask template 사용
@@ -64,17 +72,7 @@ Python Flask Example
   - 한 html 안에 1개 이상 사용이 가능하다.
   - ex) "include/inc_header.html" 이렇게 사용할 수있다.
 ```
-### SQLAlchemy 사용
-> 1.db생성
-```
-    * 가상환경 상에서 아래 명령문을 수행
-    - flask db init
-    - flask db migrate -m "users table"
-    - flask db upgrade
-      > DB에 반영
-    - flask db migrate -m "new fields in user model"
-      > 변경사항을 DB 반영
-```
+
 ### flask Error 대처
 > 1.builtins.RuntimeError
 ```

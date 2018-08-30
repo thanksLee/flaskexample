@@ -21,24 +21,10 @@ FLUSH PRIVILEGES;
 --=================================================================================================
 -- devpythontest 계정으로 생성
 --=================================================================================================
-drop table m_users;
-
 create table m_users (
    uid int(11) auto_increment,
-   username varchar(64),
+   nickname varchar(64),
    email varchar(120),
-   password_hash varchar(128),
    primary key(uid)
 )
-engine=innodb;
-
-drop table m_posts;
-
-create table m_posts(
-    uid int(11) auto_increment,
-    body varchar(140),
-    timestamp datetime,
-    user_id int(11),
-    primary key(uid)
-)
-engine=innodb;
+engine=innodb
