@@ -48,7 +48,9 @@ Python Flask Example
  - pip install flask-sqlalchemy
  - pip install flask-migrate
  - pip install flask-login
- - pip install flask-openid
+ - pip install flask-mail
+ - pip install pyjwt
+ - pip install flask-bootstrap 
 ```
 
 ### flask template 사용
@@ -58,7 +60,9 @@ Python Flask Example
   - 한 html 안에 1개 이상 사용할 수 없다.
   - {% block body %} {% endblock %} 으로 감싸진 것을 변경한다.
   - ex) "extends/ext_header.html" 이렇게 사용할 수있다.
-  - Error Handling 시 debug=True를 하면 error페이지가 뜨지 않는다.
+  - Error Handling 시 debug=True를 하면 error페이지로 정의한 내용이 보여지지 않는다.
+    404.html, 500.html 등이 보이지지 않는다.
+    (음.. 그런데 컴을 재부팅하고 났더니.. 잘 되는군요.. )
 ```
 > 2.include
   ```
