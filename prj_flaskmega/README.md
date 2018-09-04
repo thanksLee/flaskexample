@@ -2,7 +2,7 @@
 Python Flask Example
 ```
 - The Flask Mega-Tutorial을 참조하여 만듬.
-- 내용 참조 : https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world-legacy
+- 내용 참조 : https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 ```
 
 #### 윈도우에 Python 설치
@@ -48,6 +48,7 @@ Python Flask Example
  - pip install flask-sqlalchemy
  - pip install flask-migrate
  - pip install flask-login
+ - pip install flask-openid
 ```
 
 ### flask template 사용
@@ -57,6 +58,7 @@ Python Flask Example
   - 한 html 안에 1개 이상 사용할 수 없다.
   - {% block body %} {% endblock %} 으로 감싸진 것을 변경한다.
   - ex) "extends/ext_header.html" 이렇게 사용할 수있다.
+  - Error Handling 시 debug=True를 하면 error페이지가 뜨지 않는다.
 ```
 > 2.include
   ```
@@ -74,6 +76,10 @@ Python Flask Example
       > DB에 반영
     - flask db migrate -m "new fields in user model"
       > 변경사항을 DB 반영
+> 2.datetime 사용
+    - class에 datatime 속성을 default로 셋팅하고 insert, update 시에 datetime을 set 해주지 않으면      
+      server 기동시간을 기준으로 계속 가져온다.
+      따라서 datetime을 Set 해주는 것이 정신 건강에 좋음.
 ```
 ### flask Error 대처
 > 1.builtins.RuntimeError
