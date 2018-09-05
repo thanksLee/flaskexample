@@ -50,7 +50,8 @@ Python Flask Example
  - pip install flask-login
  - pip install flask-mail
  - pip install pyjwt
- - pip install flask-bootstrap 
+ - pip install flask-bootstrap
+ - pip install flask-moment
 ```
 
 ### flask template 사용

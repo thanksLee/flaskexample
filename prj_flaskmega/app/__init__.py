@@ -8,6 +8,7 @@ from flask_bootstrap import Bootstrap
 import logging, os
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_mail import Mail
+from flask_moment import Moment
 
 app = Flask(__name__)
 #app.config["SECERT_KEY"] = "1234567890!@#$%^&*()abcdefghijklmnopqrstuvwxyz"
@@ -18,6 +19,7 @@ login = LoginManager(app)
 login.login_view = "login"
 mail = Mail(app)
 bootstrap = Bootstrap(app)
+moment = Moment(app)
 
 from app import routes, models, errors
 
