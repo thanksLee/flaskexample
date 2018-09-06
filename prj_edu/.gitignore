@@ -1,3 +1,6 @@
 .*.bak
 .idea
+*.pyc
 /venv/
+/migrations/
+/logs/
