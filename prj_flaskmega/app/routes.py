@@ -1,7 +1,9 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, g
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
+
+from flask_babel import _, get_locale
 
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
@@ -18,7 +20,7 @@ def index():
         post = Post(body=form.post.data, timestamp=datetime.now(), author=current_user)
         db.session.add(post)
         db.session.commit()
-        flash("Your post is now live!")
+        flash(_("Your post is now live!"))
         return redirect(url_for("index"))
 
     page = request.args.get("page", 1, type=int)
@@ -121,7 +123,7 @@ def follow(username):
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash("User {} not found.".format(username))
+        flash(_("User %(username)s not found.", username=username))
         return redirect(url_for("index"))
     if user == current_user:
         flash("You cannot unfollow yourself!")
@@ -181,4 +183,6 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.now()
         db.session.commit()
+
+    g.locale = str(get_locale())
 

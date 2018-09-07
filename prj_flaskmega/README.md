@@ -52,6 +52,18 @@ Python Flask Example
  - pip install pyjwt
  - pip install flask-bootstrap
  - pip install flask-moment
+ - pip install guess-language_spirit
+ - pip install requests
+ - pip install flask-babel
+   > 다국어
+     * 처음 처리
+     * pybabel extract -F babel.cfg -k _l -o messages.pot .
+     * pybabel init -i messages.pot -d app/translations -l es
+     * pybabel compile -d app/translations
+     
+     * 갱신
+     * pybabel extract -F babel.cfg -k _l -o messages.pot .
+     * pybabel update -i messages.pot -d app/translations
 ```
 
 ### flask template 사용

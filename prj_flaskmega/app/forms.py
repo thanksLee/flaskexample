@@ -1,11 +1,11 @@
-from flask import Flask
 from flask_wtf import FlaskForm
+from flask_babel import lazy_gettext as _l
 from wtforms import StringField, BooleanField, SubmitField, PasswordField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app.models import User
 
 class LoginForm(FlaskForm):
-    username = StringField("Username", validators=[DataRequired()])
+    username = StringField(_l("Username"), validators=[DataRequired()])
     password = StringField("Password", validators=[DataRequired()])
     remember_me = BooleanField("Remember Me")
     submit = SubmitField("Sign In")
