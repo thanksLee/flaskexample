@@ -54,6 +54,7 @@ Python Flask Example
  - pip install flask-moment
  - pip install guess-language_spirit
  - pip install requests
+ - pip install rq
  - pip install flask-babel
    > 다국어
      * 처음 처리
@@ -64,6 +65,10 @@ Python Flask Example
      * 갱신
      * pybabel extract -F babel.cfg -k _l -o messages.pot .
      * pybabel update -i messages.pot -d app/translations
+```
+```
+- full text search
+  > pip install elasticsearch
 ```
 
 ### flask template 사용
