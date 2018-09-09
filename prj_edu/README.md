@@ -20,9 +20,17 @@ Python Flask Example
 ```
 - PyPI(python Package Index) : 파이썬 패키지를 설치하는 프로그램(주로 커맨드 창이나 쉘에서 사용)
 ```
-> 2.Flask 전체적인 흐름
+> 2.Flask
 ```
-- User 호출 -> Flask Framework (route) -> View 함수 -> Business Logic 처리 -> Jinja2 Template -> User에게 전달
+- 전체적인 흐름
+  > User 호출 -> Flask Framework (route) -> View 함수 -> Business Logic 처리 -> Jinja2 Template -> User에게 전달
+- 마이크로 프레임워크 (Micro Framework)
+  > 파이썬 : Flask(WSGI 구현체인 Werkzeug와 템플릿 Jinja2), 루비 : 시나트라(Sinatra) - 마이크로플임워크의 원조
+  > 웹 프로그래밍에 있어서 가장 핵심적인 요소만을 포함하고 있는 프레임워크
+- 풀스택 프레임워크 (Fullstack Framework)
+  > Django, Web2py, Turbogear
+  > 웹프로그래밍을 할때 필요로하는 모든 것을 종하벅으로 갖추고 있는 프레임워크
+    인증과 권한, ORM, 템플릿 라이브러리, 국제화화 지역화, 관리자, 보안 등의 여러요소를 갖춤
 ```
 > 3.라우팅
 ```
@@ -75,4 +83,28 @@ Python Flask Example
   > Accept-Language : 브라우저가 수용할 수 있는 응답결과의 언어와 선호도
   > Accept_Encoding : 브라우저가 수용할 수 있는 응답 인코딩 형태와 선호도.  
   > Key : Value 형태로 관리.
+- HTTP 메시지는 요청(Request)메시지와 응답(Response)메시지로 나눈다.
+- HTTP 요청 메시지 : 메서드(GET, POST), HTTP버전(HTTP/1.1), 호스트명, 웹브라우저가 무엇인지(User_Agent 헤더)   
+                     어떤 언어(ko_KR, ko:en-US)/자원 형태를 받아들이는지 기록 
+- HTTP 응답 메시지 : 첫행에는 HTTP 버전, HTTP 상태코드(200:성공), 상태코드 문자열 OK
+                     두번째 행부터는 순서없이 정보를 기술한다. 날짜, 서버의 종류,사용자 정의 헤더도 포함된다.
+                     X-로 시작하는 헤더명은 사용자 정의 헤더라고 본다.
+                     (사용자 정의 헤더는 웹프로그램과 웹브라우저가 해석할수 있을때 의미있는 정보가 된다.)
+- 파이썬을 위한 웹프로그램의 통신규약
+  > 웹프로그램은 사용자가 보낸 요청과 요청을 처리한 결과를 웹서버를 경유해서 주고받는다.
+    이때 웹서버와 웹프로그램간의 메시지를 주고 받기 위한 약속이 필요한데 이 약속을 CGI (Common Gateway Interface)  규약이라 한다.
+  > CGI (Common Gateway Interface) : 환경변수나 표준 입출력을 다룰수 있는 언어라면 모두 사용가능하지만,
+                                  실행속도나 개발 편의성을 고려하여 200년대 초까지는 대부분 펄(Perl) 언어를 사용하였다.
+  > 소스코드의 보안성을 위해 C, C++, 델파이와 같은 언어를 사용하는 경우도 있는데, 이 언어들은 웹에
+    특화된 언어가 아니기에 유지보수나 프로그램작성에 어려움이 있다.
+  > 파이썬은 CGI 모듈을 통해 CGI  환경변수와 CGI 표준 입출력에 직접 액세스해서 웹프로그램을 작성할 수 있다.
+  > 웹프로그램은 웹서버와는 독립적이어야 하는데 파이썬은 WSGI(Web Server Gateway Interface) 표준을 지켜 독립성을 구현해 준다.
+  > WSGI 표준을 따르면 웹서버의 종류와는 상관없이 동작이 된다.
+- ** flask는 Werkzeug(벡자이그) 기반으로 작성된다.
+- 벡자이그는 WSGI 코어와 URL 라우팅을 지원하고 있다.                         
+```
+> 6.Jinja2 템플릿 엔진
+```
+- Flask 설치할 때 같이 설치되기 때문에 추가 설치 할 필요가 없다.
+- Flask의 템플릿 파일들은 기본적으로 /templates/ 폴더에 저장한다.
 ```
