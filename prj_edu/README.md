@@ -105,6 +105,17 @@ Python Flask Example
 ```
 > 6.Jinja2 템플릿 엔진
 ```
+- 예제 : ex08.py, ex09.py
 - Flask 설치할 때 같이 설치되기 때문에 추가 설치 할 필요가 없다.
 - Flask의 템플릿 파일들은 기본적으로 /templates/ 폴더에 저장한다.
+- Jinja2에서 템플릿 표현식
+  > {% : 템플릿에서의 프로그래밍 영역을 넣기 위해 시작하는 기호 - block_start_string, 
+  > %} : 템플릿에서의 프로그래밍 영역 기술을 끝내고 프로그래밍 여역을 조료하기 위해 사용하는 기호  - block_end_string (템플릿에서의 프로그래밍 영역을 넣기 위한 기호)
+  > {{ : 변수를 출력하기 위해 시작하는 기호 - variable_start_string
+  > }} : 변수 출력이 끝난고 나서 사용하는 기호 - variable_end_string
+  > {# : 주석을 넣기 위해 시작하는 기호 - comment_start_string
+  > #} : 주석을 넣고 종료하기위해 사용하는 기호 - comment_end_string
+- 템플릿 상속
+  > {% extends "<부모 템플릿 이름>" %}
+  > {% block %} <대체할코드> {% endblock %}  
 ```
