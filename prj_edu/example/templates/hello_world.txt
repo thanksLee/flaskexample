@@ -1,0 +1,15 @@
+Hello, World!!!
+
+{{ name }} 은 {{ animal }} 3마리를 가지고 있다.
+
+{{ data.name }} 는 연봉이 {{ data.salary }} 입니다.
+
+{% if truth %}
+    진실입니다.
+{% else %}
+    이것은 거짓입니다.
+{% endif %}
+
+{% for color in colors %}
+    {{ color }}
+{% endfor %}
