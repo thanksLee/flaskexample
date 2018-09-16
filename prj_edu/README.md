@@ -105,9 +105,10 @@ Python Flask Example
 ```
 > 6.Jinja2 템플릿 엔진
 ```
-- 예제 : ex08.py, ex09.py,  ex10.py
+- 예제 : ex08.py, ex09.py,  ex10.py, ex11.py
 - Flask 설치할 때 같이 설치되기 때문에 추가 설치 할 필요가 없다.
 - Flask의 템플릿 파일들은 기본적으로 /templates/ 폴더에 저장한다.
+- Jinja2는 탭, 공백문자, 개행문자를 제거하지 않고 그대로 둔다.
 - Jinja2에서 템플릿 표현식
   > {% : 템플릿에서의 프로그래밍 영역을 넣기 위해 시작하는 기호 - block_start_string, 
   > %} : 템플릿에서의 프로그래밍 영역 기술을 끝내고 프로그래밍 여역을 조료하기 위해 사용하는 기호  - block_end_string (템플릿에서의 프로그래밍 영역을 넣기 위한 기호)
@@ -118,5 +119,38 @@ Python Flask Example
 - 템플릿 상속
   > {% extends "<부모 템플릿 이름>" %}
   > {% block %} <대체할코드> {% endblock %}
-
+    * 블록을 여러개 사용할때 endblock에 이름을 줄 수 있다.
+      단, block의 명과 endblock의 명은 같아야 한다.
+- Super block
+  > super를 호출하여 부모 블록의 내용을 렌더링 하는 블록, 부모블록의 결과를 반환한다.
+    즉, 부보가 갖고 있는 block을 호출하여 사용한다.
+- 공백 제거
+  > {% block %} 블록 선언의 % 에 {%- 공백제거, -%} 공백제거 를 한다. 
+    - {% - (X), {%- (0) 사이에 공백이 있으면 안된다.!!! 
+- escape
+  > 어떤 조건이나 환경에서 특별한 구문이나 의미로 해석되는 문자열로부터 그 의미를 제거하여
+    일반적인 문자열로 처리하는 것
+  > Jinja2에서는 홑따옴표를 이용하여 escape처리를 한다.
+    ex) {{ '}}' }}
+  > 큰 범위를 escape처리를 하고자 할경우는 raw 구문을 이용.
+    템플릿 코드를 예제로 만들어서 보여주고자 할 경우는 raw를 이용하여 작성한다.ㄴ
+- macro
+    > 일반적인 프로그래밍 어어의 함수와 같다.
+      <p><input type = "text" name = "username" value="" size = "30"></p>    
+      <p><input type = "password" name = "password" value="" size = "30"></p>
+      위의 템플릿 코드를 아래와 같이 매크로로 만들어서 필요한 곳에 호출하여 사용한다.
+    > 일반적인 매크로의 구문
+    > {%  macro <매크로 이름>(매크로 인자, ...) %}
+         <실행코드> 
+      {% endmacro %}
+    > macro를 정의한 템플릿과 macro를 사용하는 템플릿이 서로다를경우에는 import 명을 이용하여 불러온다.
+      1) {% from "macro.html" import input %}
+      2) {% import 'macro.html' as input_macro %}
+         <p> {{ input_macro.input('username') }} </p>
+         <p> {{ input_macro.input('password', type='password') }} </p>
+    > macro의 특별 변수
+      * varargs : macro가 추가로 받은 가변 인자를 참조할때 사용하며, 리스트 형태의 인자.
+      * kwargs : macro가 추가로 받은 키워드 인자를 참조할때 사용하면 사전 형태의 인자
+      * caller : macro를 호출한 call 블록을 호충하기 위해서 사용하며 macro가 call 블록에서
+                 호출 되었ㅇㄹ때만 사용가능
 ```

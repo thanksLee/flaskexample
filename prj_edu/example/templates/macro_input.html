@@ -1,0 +1,14 @@
+1)
+{% from "macro.html" import input %}
+<p>{{ input('username') }}</p>
+<p>{{ input('password', type='password') }}</p>
+
+2)
+{% import 'macro.html' as input_macro %}
+<p> {{ input_macro.input('username') }} </p>
+<p> {{ input_macro.input('password', type='password') }} </p>
+
+매크로 변수
+{% macro input() -%}
+    <input type="{{ kwargs['type'] or 'text' }}" name="{{ varargs[0] }}", value="{{ kwargs['value']|e or '' }}" size="{{ kwargs['size'] or 30 }}">
+{%- endmacro %}
