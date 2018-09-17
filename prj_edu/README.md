@@ -45,11 +45,24 @@ Python Flask Example
     http://127.0.0.1:5000/hello   -> 정상 출력
     http://127.0.0.1:5000/hello/  -> 정상 출력
   즉, 뒤에 '/' 이 있고 없고에 따라서 Not Found 춮력
-
 - uri 변수 처리
   > 예제 :  ex03.py, ex04.py
   > @app.route("/user/<userName>")
   > @app.route("/post/<int:post_id>")
+- routing 옵션
+  > HTTP 메서드 중 GET, POST가 대표적이다.
+  > GET, POST이외에도 PUT, DELETE, HED, OPTIONS 메서드가 있는데, 이러한 타입들은 REST API개발시에 주로 사용된다.
+  > 웹 프로그램에 지원을 요청하는 대표적인 방법은 GET 방식이다. 
+    * GET 형식은 웹브라우저의 주소 입력란에 전달하고자 하는 정보가 노출되기때문에 중요한 정보 전달을 할때는 사용하지 않는다.
+    * POST 형식은 HTTP 메시지의 BODY에 데이터를 포함해서 전달한다. 따라서 많은 양의 데이터를 전달을 할때 사용하며,
+      HTTPS를 사용하는 웹서버는 전달하는 데이터가 중요하기때문에 암호화 처리되어 전달.
+    * 사용
+      @app.route("/aurl", methods=['GET']) 일반적으로 GET방식은 생략
+      @app.route("/burl", methods=['POST'])
+      @app.route("/curl", methods=['GET', POST'])
+      
+      + route 데코레이터에 methods 인자가 없으면 뷰함수는 GET 요청만 처리된다.
+      + 
 ```
 > 4.templates 사용
 ```
