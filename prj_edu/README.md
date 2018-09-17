@@ -50,6 +50,7 @@ Python Flask Example
   > @app.route("/user/<userName>")
   > @app.route("/post/<int:post_id>")
 - routing 옵션
+  > 예제 : ex12.py, ex13.py
   > HTTP 메서드 중 GET, POST가 대표적이다.
   > GET, POST이외에도 PUT, DELETE, HED, OPTIONS 메서드가 있는데, 이러한 타입들은 REST API개발시에 주로 사용된다.
   > 웹 프로그램에 지원을 요청하는 대표적인 방법은 GET 방식이다. 
@@ -62,7 +63,17 @@ Python Flask Example
       @app.route("/curl", methods=['GET', POST'])
       
       + route 데코레이터에 methods 인자가 없으면 뷰함수는 GET 요청만 처리된다.
-      + 
+      + URL 변수에 기본값 할당하기
+        @app.route("/aaa', defaults={'page':'index'})
+        @app.route("/aaa/<page>")
+        브라우저에서 /aaa/를 호출한 경우에는 /aaa/index 형태의 주소를 호출한 것과 같다.
+- redirect_to
+  > @app.route('/aaa', redirect_to='/new_aaa')
+  > redirect_to 옵션에 다른 url이 아닌 함수를 전달하는 방법
+    * 함수를 전달하기 위해서는 미리 함수를 정의 해둬야 한다.
+    * 정의된 함수의 첫번째 인자는 adapter이어야 한다.
+    
+    url adapter -> 
 ```
 > 4.templates 사용
 ```
