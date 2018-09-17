@@ -29,3 +29,20 @@ print(template.render())
 
 template = env.get_template("macro_input.html")
 print(template.render())
+
+template = env.get_template("macro_input2.html")
+print(template.render())
+
+template = env.get_template("macro_input3.html")
+print(template.render())
+
+template = env.get_template("macro_caller.html")
+print(template.render())
+
+userData = [  {'user_name':'Hong', 'name':'홍길동', 'job':'개발자'}
+            , {'user_name':'kim', 'name':'김매령', 'job':'디자이너'}
+            , {'user_name':'lee', 'name':'이병훈', 'job':'DBA'}
+            ]
+
+template = env.get_template("macro_caller2.html")
+print(template.render(user_list=userData))

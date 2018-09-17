@@ -105,7 +105,7 @@ Python Flask Example
 ```
 > 6.Jinja2 템플릿 엔진
 ```
-- 예제 : ex08.py, ex09.py,  ex10.py, ex11.py
+- 예제 : ex08.py, ex09.py,  ex10.py, ex11.py, ex12.py
 - Flask 설치할 때 같이 설치되기 때문에 추가 설치 할 필요가 없다.
 - Flask의 템플릿 파일들은 기본적으로 /templates/ 폴더에 저장한다.
 - Jinja2는 탭, 공백문자, 개행문자를 제거하지 않고 그대로 둔다.
@@ -145,12 +145,32 @@ Python Flask Example
       {% endmacro %}
     > macro를 정의한 템플릿과 macro를 사용하는 템플릿이 서로다를경우에는 import 명을 이용하여 불러온다.
       1) {% from "macro.html" import input %}
+         * python import 처럼 사용 가능
       2) {% import 'macro.html' as input_macro %}
          <p> {{ input_macro.input('username') }} </p>
          <p> {{ input_macro.input('password', type='password') }} </p>
+         * alias를 사용하여 사용 가능
     > macro의 특별 변수
       * varargs : macro가 추가로 받은 가변 인자를 참조할때 사용하며, 리스트 형태의 인자.
       * kwargs : macro가 추가로 받은 키워드 인자를 참조할때 사용하면 사전 형태의 인자
       * caller : macro를 호출한 call 블록을 호충하기 위해서 사용하며 macro가 call 블록에서
-                 호출 되었ㅇㄹ때만 사용가능
+                 호출 되었을때만 사용가능
+    > macro에서 제공하는 meta 정보(객체속성)
+      매크로 바디에서 매크로 객체를 참조할때는 매크로 이름을 이용하여 참조한다.
+      * name : 매크로 객체의 이름
+      * arguments : 매크로에 선언되어 있는 파라미터 목록(튜플로 반환)
+      * default : 매크로 인자가 받는 기본값 목록(튜플로 반환)
+      * catch_kwargs : 매크로 바디에서 키워드 인자를 참조하면 True를 반환하고, 참조하지 않으면 False로 반환
+      * catch_varargs : 매크로 바디에서 가변 인자를 참조하면 True를 반환하고, 참조하지 않으면 False를 반환
+      * caller : 매크로를 호출한 영역이 call 블록이면 True를 반환하고, 그렇지 않으면 False를 반환
+- call block  : call 명령을 이용해서 매크로를 호출한 경우 해당 블록을 call 블록이라 한다.
+  {% call 매크로 %}
+     매크로를 호출했을때 포함할 내용
+  {% endcall %}
+  매크로 내부에서 {{ caller() }} 기술한다.
+  이때 caller()블록 바디에 있는 내용을 가져온다.
+  > 인자를 받는 call 블록 선어하기
+    {% call(args) 매크로명 %}
+        call이 받은 인자를 처리한다.
+    {% endcall %}
 ```

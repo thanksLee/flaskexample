@@ -1,0 +1,17 @@
+{% macro user_info(users) %}
+    <ul>
+        {% for user in users %}
+        <li><p>{{ user['user_name']|e }}</p>p{{ caller(user_data = user) }}</li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+# call block
+{% call(user_data) user_info(user_list) %}
+    <dl>
+        <dl>사용자 성별</dl>
+        <dd>{{ user_data['name'] }}</dd>
+        <dl>사용자 직업</dl>
+        <dd>{{ user_data['job'] }}</dd>
+    </dl>
+{% endcall %}
