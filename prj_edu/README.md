@@ -19,6 +19,7 @@ Python Flask Example
 > 1.pip 명령어
 ```
 - PyPI(python Package Index) : 파이썬 패키지를 설치하는 프로그램(주로 커맨드 창이나 쉘에서 사용)
+  > pip install flask
 ```
 > 2.Flask
 ```
@@ -196,5 +197,47 @@ Python Flask Example
   > 인자를 받는 call 블록 선어하기
     {% call(args) 매크로명 %}
         call이 받은 인자를 처리한다.
-    {% endcall %}
+    {% endcall %}    
+```
+> 7.Request 객체 사용하기
+```
+- 예제 : ex14.py
+- HTTP메시지 (request 메시지, response 메시지)
+- HTTP 메시지는 평문 형태로 되어 있으며, 헤더와 바디로 구성되어 있다.
+  이때 헤더와 바디의 구분은 빈줄로구분한다.
+  > HTTP 메시지는 웹서버와 웹브라저간의 문자열 타입으로만 데이터를 주고 받는다.
+- Flask에서 HTTP요청과 응답을 처리하기 위해서는 Request 객체와 Response 객체를 사용한다.
+  > request.args에서 args는 GET 방식으로 전달된 데이터만 접근할 수 있다.
+  > request의 value 속성은 GET 또는 POST 메서드로 데이터를 보냈을때 HTTP 메서드 타입에 상관없이 데이터를 읽을 수 있다.
+    여기서 주의할 점은 GET, POST 가 동일한 변수명을 사용했을 경우 value 속성은 GET 메서드로 보낸 데이터를 우선으로 한다.
+    주의!!!. 브라우저로부터 변수가 넘어오지 않을 경우 오류가 발생한다. 따라서 기본값을 설정한다.
+    default 인자를 사용할수 있으며, 생략이 가능하다.
+  > 프로그래머가 프로그래머가 반환 타입을 int객체로 변환하여 반환한다.
+    ex) return request.values.get('name', 100, type=int) -> int 객체로 변환
+    type의 값으로 파이썬에서 제공하는 기본 타입 이외에도 함수나 클래스(인스턴스)를 사용할 수 있다.
+    즉, 사용자 정의 데이터 타입을 사용.
+- 사용자 정의 타입이 클래스인 경우
+  > get 메소스에서 datetime 객체를 사용하기 위해서는 __call__ 메소드를 정의 해야 한다.
+- Flask 모듈에서 request 클래스를 가져온다.
+- 같은 변수에 여러개의 값이 넘어오는 경우에는 리스트 타입으로 반환 해주면 된다.
+  이때 사용하는 메소드는 getlist 이다. getlist 메소드는 default 인자를 사용하지 않는다.
+```
+> 8.MultiDict
+```
+- ex) ex15.py
+- MultiDict 데이터타입 : GET과 POST 메서드로 넘어온 데이터(키, 값) 튜플 형태의 리스트타입d이다.
+- MultiDict 타입에서 제공하는 메서드
+- 명령어
+  get, getlist, add, setlist, setdefault, setlistdefault, clear, copy, deepcopy, pop, poplist, update
+  > add : MultiDit에 키와 값을 추가하는 메소드
+  > setdefault : add메소드와 거의 비슷하게 동작하지만, 변수가 있을때는 그 변수의 값을 리턴하고
+                 설정하고자 하는 변수가 없을때 default 값으로 데이터를 추가한다.
+  > copy(얕은복사) : MultiDict 데이터의 변수값이 리스트 타입으로 있는 경우, 그 리스트 타입의 메모리 주소를 복사
+  > deepcopy(깊은복사) : 리스트타입의 메모리 주소가 아니라, 그 데이터를 복사.
+  > pop : get메소드와 유사한 동작을 하지만 기능적인 차이가 있다. (잘라내기)
+          get메소드는 MultiDict 데이터 변수에서 특정 변수 키의 키값을 메모리에서 복사해서 프로그램에 리턴을 하는 반면에
+          pop은 변수의 키 값을 복사하는 것이 아니라 MultiDict 데이터 변수에서 키를 제거하고 그 값을 리턴한다.
+  > poplist : pop 메소드와 같은 동작을 하지만 같은 이름의 변수 키로 여러 값이 들어 올때 이 값들을 꺼내올때
+              사용한다. getlist와 차이점은 값들을 꺼내온 뒤에 MultiDict 변수 키를 제거한다.
+  > update : 기존의 MultiDict 타입의 변수에 다른 MultiDict 타입 변수의 내용을 삽입할때 사용
 ```
