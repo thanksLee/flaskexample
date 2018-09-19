@@ -241,3 +241,46 @@ Python Flask Example
               사용한다. getlist와 차이점은 값들을 꺼내온 뒤에 MultiDict 변수 키를 제거한다.
   > update : 기존의 MultiDict 타입의 변수에 다른 MultiDict 타입 변수의 내용을 삽입할때 사용
 ```
+> 9.WSGI 표준 환경변수
+```
+- ex) ex16.py
+- REQUEST_METHOD : 웹브라우저가 보낸 요청의 처리 방식에 대한 문자열 포함.
+- SCRIT_NAME : 보통 생략한다. (FLASK에서는 보통 공란이다.)
+               스크립트 파일명 표현  (Flask에서는 빈값으로 출력)
+- PATH_INFO : URL 경로 ex) http://www.aaa.com/ccc/main -> PATH_INFO : /ccc/main
+- CONTENT_TYPE : 웹브라우저가 보낸 HTTP 요청메시지의 바디에 포함되는 컨텐츠의 형태 저장
+                 HTTP 헤더에 보면 Content-Type 값을 확인한다.
+- SERVER_NAME : 서버의 도메인 주소(IP주소)가 저장. ex) http://www.aaa.com/ccc/main -> SERVER_NAME : www.aaa.com
+- SERVER_PORT : 웹 어플리케이션이 동작하고 있는 서버 포트번호가 저장.
+                ex) http://www.aaa.com:5000/env -> 5000번 저장, 도메인주소에 포트가 없으면 80 저장
+- SERVER_PROTOCOL : 웹 어플리케이션이 동작하는 서버 프로토콜 버전 표시 (보통 Version HTTP/1.1
+- QUERY_STRING : URL 끝에 보면 ? 문자 뒤에 오는 문자열 Query String이라고 한다. (보통 키 = 값) 형태로 지정
+                키값이 두개 이상일때는 키사이에 &문자로 구분한다.
+```
+> 10.request
+```
+- ex16.py, ex17.py
+- request의 environ 속성 : HTTP 통신에 사용하는 환경변수를 담고 있는 사전 (wsgi 전용 환경변수도 포함)
+- wsgi 전용 환경변수
+  > wsgi.version : WSGI 버전을 튜플 형태로 반환(1.0)
+  > wsgi.url_scheme :  URL 스킴의 종류, 웹서버인 경우는 http를 반환한다.                
+- request URL 관련 속성
+  > path : url 경로(환경변수 PATH_INFO 와 같음)
+  > url : 전체 URL 모두 표시
+  > base_url : 쿼리 스트링을 제외한 URL
+  > url_root : 환경변수 SERVER_NAME 와 같다.
+```
+> 11.response
+```
+- response 객체를 이용한 웹브라우저에 응답하기
+- from flask import Flask, Response 처럼 앞의 'R'이 대문자.
+- flask에서 웹브라우저에 응답 할 때 모든 데이터는 Response 객체를 이용한다.
+- Response 객체를 이용하여 사용자 정보를 유지하기 위하여 쿠키를 설정하기도 한다.
+- Response 객체를 생성할때 사용하는 인자. (생략가능, 최대 6개 지원)
+  > reponse : 웹브라우저에게 응답할 데이터 
+  > status : HTTP 상태코드 200 - OK, 그 상태에 해당하는 코드 
+  > headers : 웹브라우저에 응답할 헤더
+  > minmetype : image/jpeg, text/html 과 같이 HTTP 메세지 바디가 어떤 mime type 데이터인지를 지정.
+  > content_type : 웹브라우저에 응답하는 컨텐츠 타입을 지정, mimetype 과 같은 역할을 한다.
+  > direct_pssthrough : True / False 설정
+```
