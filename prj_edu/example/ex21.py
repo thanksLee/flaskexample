@@ -65,7 +65,7 @@ def before_request():
 @app.after_request
 def after_request():
     print("매번 HTTP 요청이 처리되고 나서 실행된다.")
-    return 
+    return
 
 if __name__ == "__main__":
     app.run(debug=True)
