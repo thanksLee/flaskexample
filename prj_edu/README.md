@@ -332,3 +332,22 @@ Python Flask Example
                             기본 설정값은 False
   > PERMANENT_SESSION_LIFETIME : 세션의 유효시간을 설정. (기본값은 31일로 되어 있다.)                            
 ```
+> 14.Etc
+````
+- ex) ex21.py
+- add_url_rule 메소드
+  > route 데코레이터 대신에 사용하는 메소드
+    (url, endpoint, view function)
+- make_response 메소드
+  > Response를 만들기 위한 메소드
+- reponse를 json으로 만들기
+- Request 후킹
+  > HTTP 요청 전후에 대한 핸들어
+  > Flask에서는 HTTP 요청 전후에 사용할 수 있는 데코레이터를 제공하고 있다.
+    * before_first_request : 웹 프로그램이 실행된 이후 가장 처음에 들어오는 http 요청에서만 실행.
+    * before_request : 매번 http 요청(request) 이 들어올때 마다 실행.
+    * after_request : 매번 http 요청이 끝나고 브라우저에 응답하기전에 실행. (웹브라우저에 보이전)
+    * teardown_request : http 요청의 결과가 브라우저에 보내진 다음에 실행.
+    * teardown_appcontext : http 요청이 완전히 완료되면 실행 (application context내에서 실행)
+    
+````
