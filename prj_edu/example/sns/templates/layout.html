@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} 환영합니다. {% endblock title %} | twitter 프로젝트</title>
+    <link rel="stylesheet" type="text/css" ref="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Twitter 만들기 연습</h1>
+        <div class="navigation">
+            <a href="#"> 전체 트윗 목록</a>
+            <a href="#"> 회원가입</a>
+            <a href="#"> 로그인</a>
+        </div>
+    </div>
+    {% with flashes = get_flashed_messages() %}
+        {% if flashes %}
+            <ul class="flashes">
+                {% for message in flashes %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <div class="body">
+        {% block body %} {% endblock body %}
+    </div>
+    <div class="footer">
+        트위터 프로젝트 &mdash; 플라스크를 이용한 웹 어플리케이션
+    </div>
+</body>
+</html>

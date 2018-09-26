@@ -334,7 +334,7 @@ Python Flask Example
 ```
 > 14.Etc
 ````
-- ex) ex21.py
+- ex) ex21.py, ex22.py
 - add_url_rule 메소드
   > route 데코레이터 대신에 사용하는 메소드
     (url, endpoint, view function)
@@ -349,5 +349,40 @@ Python Flask Example
     * after_request : 매번 http 요청이 끝나고 브라우저에 응답하기전에 실행. (웹브라우저에 보이전)
     * teardown_request : http 요청의 결과가 브라우저에 보내진 다음에 실행.
     * teardown_appcontext : http 요청이 완전히 완료되면 실행 (application context내에서 실행)
-    
+- Flask Context 전역 변수
+  > request를 처리하기 위해 제공되는 객체
+    * 어플리케이션과 관련된 객체
+      > current_app : 현재 활성화되어 있는 appilcation 객체 (인스턴스)
+      > g : request 를 처리하는 동안 어플리케이션 임시 저장 정보를 사용할 수 있는 객체
+            g는 Flask 인스턴스 객체의 app_ctx_globals_class 의 인스턴스 변수이다.
+            from flask import g
+    * Request Context
+      > request : Client에 의해 송신된 HTTP request의 contents를 관리하는 객체
+      > session  :  사용자 session, 어플리케이션 request 사이의 정보를 저장에서 사용하는 dict 타입 객체     
 ````
+> 15.메시지 플래싱(Message Flashing)
+```
+- ex) ex24.py
+- 플라스크에서 제공하는 플래싱 시스템
+- 요청의 끝에 메시지를 기록하고 그 다음 요청에서만 그 메시지를 접근할 수 있도록 하는 기능.
+```
+
+> 16.Project
+```
+- 트윗 어플리케이션
+- 구현 기능
+  > 사용자 등록 기능
+  > 로그인 / 로그아웃
+  > 트윗 글 등록
+  > 팔로우 / 언팔로우
+  > 글 목록(사용자, 공용)
+- 기술요소
+  > 데이터베이스 (Mysql) 이용
+  > gravatar 이용
+  > 비밀번호 해싱
+  > jinja2 템플릿 엔진
+
+- 설치 package
+  > pip flask
+  > pip install MySQL-python  
+```

@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, redirect, make_response, url_for, jsonify
+from flask import Flask, request, Response, redirect, make_response, url_for, jsonify, render_template, current_app, g
 
 
 app = Flask(__name__)
@@ -63,9 +63,36 @@ def before_request():
 
 
 @app.after_request
-def after_request():
+def after_request(response):
     print("매번 HTTP 요청이 처리되고 나서 실행된다.")
-    return
+    return response
+
+@app.teardown_request
+def teardown_requet(exception):
+    print("매번 HTTP 요청의 결과가 브라우저에 보내진 다음에 호출된다.")
+
+@app.teardown_appcontext
+def teardown_appcontext(exception):
+    print("HTTP 요청의 애플리케이션 컨텍스트가 종료될때 실행된다.")
+
+
+@app.route("/cont")
+def cont():
+    return "Hello Flask!!"
+
+@app.route("/hi")
+def hi() :
+    return "Hi!!!"
+
+@app.before_request
+def before_request():
+    print("before request")
+
+
+@app.teardown_request
+def teardown_request(exception):
+    print("end request")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

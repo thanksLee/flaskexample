@@ -1,0 +1,17 @@
+{% extends "flash_layout.html" %}
+
+{% block body %}
+    <h1>로그인</h1>
+    {% if error %}
+        <p class="error"><strong>Error : </strong>{{ error }}</p>
+    {% endif %}
+    <form action="" method="post">
+        <dl>
+            <dt>User Name : </dt>
+            <dd><input type="text" name="username" vaue="{{ request.form.username }}"></dd>
+            <dt>Password : </dt>
+            <dd><input type="password" name="password"></dd>
+        </dl>
+        <input type="submit" value="로그인">
+    </form>
+{% endblock %}
