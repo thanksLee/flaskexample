@@ -1,4 +1,11 @@
 body{
-    background:#caece9:
-    font-size:14px
+    background:#caece9;
+    font-size:14px;
+}
+
+div.container{
+    background:white;
+    border:1px solid #6eccc4;
+    width=700px;
+    margin:30x auto;
 }

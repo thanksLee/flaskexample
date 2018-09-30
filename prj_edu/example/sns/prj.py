@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, url_for, redirect, g, flash
 import MySQLdb as mysql
+from contextlib import closing
 
 SECRET_KEY = 'development key'
 
@@ -20,6 +21,10 @@ def query_db(query, args = (), one=False):
 #    with closing(connect_db) as db: #with closing 블록이 끝나면 인자로 받은 객체를 닫거나 제거한다.
 #        with app.open_resource()
 
+def init_db():
+    with closing(connect_db()) as db:
+        db.commit()
+
 # S : 후킹 처리
 
 @app.before_request
@@ -37,6 +42,8 @@ def teardown_request(exception):
         g.db.close()
 
 # E : 후킹 처리
+
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
