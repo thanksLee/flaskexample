@@ -197,7 +197,14 @@ Python Flask Example
   > 인자를 받는 call 블록 선어하기
     {% call(args) 매크로명 %}
         call이 받은 인자를 처리한다.
-    {% endcall %}    
+    {% endcall %}
+- Jinja2에서 사용할 수 있는 전역 객체
+  > config : 현재 어플리케이션에 등록된 설정 객체(flask.config)
+  > request : 현재 요청된 객체(flask.request)
+  > session : 현재 유지되고 있는 세션 객체(flask.session)
+  > g : 전역변수로 사용되는 요청과 연결된 전역 객체(flask.g)
+  > url_for : 함수에 대한 URL을 얻기 위해 사용하는 함수(flask.url_for)
+  > get_flashed_messages : 뷰함수에서 flash함수를 사용해서 저장한 메시지를 얻어오는 함수(flask.get_flashed_message())
 ```
 > 7.Request 객체 사용하기
 ```

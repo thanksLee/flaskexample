@@ -43,12 +43,16 @@ def teardown_request(exception):
 
 # E : 후킹 처리
 
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     error = None
     return render_template("register.html", error=error)
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    error = None
+    return render_template("login.html", error=error)
 
 
 if __name__ == "__main__":
