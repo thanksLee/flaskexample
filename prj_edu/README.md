@@ -12,6 +12,8 @@ Python Flask Example
 - python 설치 : 3.7
 - pip install --upgrade setuptools
 - pip install virtualenv
+- pip instal sqlalchemy
+- pyp install pymysql
 ```
 
 #### Flask 내용 정리
@@ -205,6 +207,8 @@ Python Flask Example
   > g : 전역변수로 사용되는 요청과 연결된 전역 객체(flask.g)
   > url_for : 함수에 대한 URL을 얻기 위해 사용하는 함수(flask.url_for)
   > get_flashed_messages : 뷰함수에서 flash함수를 사용해서 저장한 메시지를 얻어오는 함수(flask.get_flashed_message())
+  > self.block_명() 처럼 함수처럼 자신의 블록을 가져 올수 있다.
+    블록을 여러번 사용할때 유용
 ```
 > 7.Request 객체 사용하기
 ```
@@ -392,4 +396,28 @@ Python Flask Example
 - 설치 package
   > pip flask
   > pip install MySQL-python  
+```
+> 17.ORM (Object Relational Mapping)
+```
+- SQL의 의존적인 코딩에서 벗어난 새로운 코딩 방법(유지보수 편리)
+- ORM : iBatis, Hibernate, SQLAlchemy(Flask)
+- SQLAlchemy 설치 : pip install sqlalchemy
+  (python anaconda 배포판에서는 기본으로 설치되어 있음)
+
+- SQLAlchemy 구성 요소
+  ----------------------------------------------------------+
+  |SQLAlchemy ORM                                           |
+  |Object Relational Mapper(ORM)                            |
+  ----------------------------------------------------------+
+  
+  ------------------------------------------------------------------------+
+  |SQLAlchemy Core                                                        |
+  |-----------------------------------------------------------------------|
+  |Schema / Types     SQL Expression Language        Engine               |
+  |                                               connection Diallect     |
+  |                                                  Pooling              |
+  ------------------------------------------------------------------------+
+                                                     DBAPI
+- SQLAlchemy ORM을 사용하기 위해서는 데이터베이스에 접속을 해야한다.
+  데이터베이스에 접속하기 위한 함수는 create_engine() 이다.                                                     
 ```

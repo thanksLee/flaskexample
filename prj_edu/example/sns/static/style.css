@@ -73,3 +73,12 @@ div.container div.footer{
     padding:5px 10px;
     text-align:center;
 }
+
+div.error{
+    margin:10px 0;
+    background:#fae4e4;
+    border:1px solid #dd6f6f;
+    border-radius:2px;
+    padding:4px;
+    font-size:13px;
+}
